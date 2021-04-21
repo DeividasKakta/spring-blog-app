@@ -18,7 +18,7 @@ public class BlogController {
     private final BlogService blogService;
 
     @GetMapping
-    public String getBlogs(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.ASC) Pageable pageable,
+    public String getBlogs(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable,
                               Model model) {
         model.addAttribute("blogPage", blogService.getAllBlogsPaginated(pageable));
 

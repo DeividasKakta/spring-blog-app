@@ -48,10 +48,49 @@
                 <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
                 <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
                 <p th:text="${blog.content}">Content</p>
-
             </article>
+
+            <!--Pagination start-->
+            <div>
+                <ul class="pagination"
+                    th:with="order=${blogPage.sort.iterator().hasNext() ? blogPage.sort.iterator().next() : null},
+                    sort=${order.property + ',' + order.direction}">
+                    <li class="page-item"
+                        th:classappend="${blogPage.number eq 0  ? 'disabled' : ''}">
+                        <a class="page-link"
+                           th:href="@{/blogs(page=${blogPage.number} - 1,sort=${sort})}"
+                           th:text="Previous">
+                            Previous
+                        </a>
+                    </li>
+
+                    <li class="page-item"
+                        th:each="pageNumber : ${#numbers.sequence(0, blogPage.totalPages - 1)}"
+                        th:classappend="${pageNumber eq (blogPage.number) ? 'active' : ''}">
+                        <a class="page-link"
+                           th:href="@{/blogs(page=${pageNumber},sort=${sort})}"
+                           th:text="${pageNumber} + 1">
+                            1
+                        </a>
+                    </li>
+
+                    <li class="page-item"
+                        th:classappend="${blogPage.number eq blogPage.totalPages - 1  ? 'disabled' : ''}">
+                        <a class="page-link"
+                           th:href="@{/blogs(page=${blogPage.number} + 1,sort=${sort})}"
+                           th:text="Next">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+
+                <!--            <span th:text="#{products.total(${productsPage.totalElements})} ">Total: 100</span>-->
+            </div>
+            <!--Pagination end-->
+
         </div>
         <!--Blog content end-->
+
     </main>
 
     <footer>
