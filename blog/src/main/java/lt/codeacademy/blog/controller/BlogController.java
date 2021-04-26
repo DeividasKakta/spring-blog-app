@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -31,6 +32,13 @@ public class BlogController {
         model.addAttribute("blog", new Blog());
 
         return "createBlog";
+    }
+
+    @PostMapping("/create")
+    public String createBlog(Blog blog) {
+        blogService.addBlog(blog);
+
+        return "redirect:/blogs";
     }
 
 }

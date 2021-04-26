@@ -7,4 +7,7 @@ import org.springframework.data.domain.Pageable;
 public interface BlogService {
 
     Page<Blog> getAllBlogsPaginated(Pageable pageable);
+
+    void addBlog(Blog blog);
+
 }
