@@ -25,13 +25,18 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+<!--          <li class="nav-item">-->
+<!--            <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--          </li>-->
+
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" th:href="@{/blogs/create}" th:text="#{create.blog.title}">Create blog</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">User</a>
+            <a class="nav-link" th:href="@{/user}" th:text="#{user.title}">User</a>
           </li>
+
         </ul>
 
         <div th:replace="this :: langSelect"></div>
@@ -50,7 +55,6 @@
   <select id="locales" class="form-select form-select" aria-label=".form-select-lg example">
     <option th:text="#{lang.select}">Select languages</option>
     <option id="selectEN" value="EN" th:text="#{lang.en}">English</option>
-<!--    <option id="selectDE" value="DE" th:text="#{lang.de}">German</option>-->
     <option id="selectLT" value="LT" th:text="#{lang.lt}">Lithuanian</option>
   </select>
 </div>
