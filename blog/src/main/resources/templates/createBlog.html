@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/mainLayout :: head(title=#{create.blog.title})"></head>
+<body>
+
+<header th:replace="fragments/mainLayout :: header"></header>
+
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 p-3 bg-light border rounded border-secondary">
+
+            <form class="row" method="POST" th:object="${blog}">
+
+                <label class="col-sm-3 col-form-label"
+                       th:text="#{create.blog.blogTitle} + ':'">
+                </label>
+                <div class="col-sm-9">
+                    <input class="form-control"
+                           type="text" name="name"
+                           th:placeholder="#{create.blog.blogTitle}"
+                           th:field="*{title}"
+                           th:classappend=" ${#fields.hasErrors('title') ? 'is-invalid' : ''}"><br/>
+                </div>
+
+                <label class="col-sm-3 col-form-label"
+                       th:text="#{create.blog.content} + ':'">
+                </label>
+                <div class="col-sm-9">
+                    <textarea class="form-control"
+                           rows="20"
+                           th:placeholder="#{create.blog.content}"
+                           th:field="*{content}"
+                           th:classappend=" ${#fields.hasErrors('content') ? 'is-invalid' : ''}"></textarea><br/>
+                </div>
+
+                <button class="btn btn-secondary" type="submit" th:text="#{create.blog.submit}"></button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

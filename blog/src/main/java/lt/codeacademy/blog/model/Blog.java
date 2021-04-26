@@ -19,7 +19,7 @@ public class Blog extends BaseEntity {
     @Column(columnDefinition = "VARCHAR(1500)")
     private String content;
 
-    private Date date;
+    private Date date = new Date();
 
 //    private String author;
 

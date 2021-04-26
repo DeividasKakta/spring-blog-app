@@ -1,6 +1,7 @@
 package lt.codeacademy.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.blog.model.Blog;
 import lt.codeacademy.blog.service.BlogService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,6 +24,13 @@ public class BlogController {
         model.addAttribute("blogPage", blogService.getAllBlogsPaginated(pageable));
 
         return "blogs";
+    }
+
+    @GetMapping("/create")
+    public String openCreateBlog(Model model) {
+        model.addAttribute("blog", new Blog());
+
+        return "createBlog";
     }
 
 }
