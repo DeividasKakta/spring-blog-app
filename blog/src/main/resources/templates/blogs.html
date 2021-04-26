@@ -7,7 +7,7 @@
 
     <main>
         <!--Blog content start-->
-        <div th:if="${not blogPage.hasContent()}" th:text="Empty list">No content</div>
+        <div th:if="${not blogPage.hasContent()}" th:text="#{blog.list.empty}">No content</div>
         <div class="container" th:if="${blogPage.hasContent()}">
             <article class="blog-post" th:each="blog : ${blogPage.content}">
                 <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
@@ -24,7 +24,7 @@
                         th:classappend="${blogPage.number eq 0  ? 'disabled' : ''}">
                         <a class="page-link"
                            th:href="@{/blogs(page=${blogPage.number} - 1,sort=${sort})}"
-                           th:text="Previous">
+                           th:text="#{pagination.previous}">
                             Previous
                         </a>
                     </li>
@@ -43,7 +43,7 @@
                         th:classappend="${blogPage.number eq blogPage.totalPages - 1  ? 'disabled' : ''}">
                         <a class="page-link"
                            th:href="@{/blogs(page=${blogPage.number} + 1,sort=${sort})}"
-                           th:text="Next">
+                           th:text="#{pagination.next}">
                             Next
                         </a>
                     </li>
