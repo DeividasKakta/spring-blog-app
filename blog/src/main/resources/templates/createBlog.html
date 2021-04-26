@@ -19,7 +19,12 @@
                            type="text" name="name"
                            th:placeholder="#{create.blog.blogTitle}"
                            th:field="*{title}"
-                           th:classappend=" ${#fields.hasErrors('title') ? 'is-invalid' : ''}"><br/>
+                           th:classappend=" ${#fields.hasErrors('title') ? 'is-invalid' : ''}"
+                           aria-describedby="titleValidation">
+                    <div class="invalid-feedback"
+                         id="titleValidation"
+                         th:if="${#fields.hasErrors('title')}"
+                         th:errors="*{title}">ERROR</div><br/>
                 </div>
 
                 <label class="col-sm-3 col-form-label"
@@ -30,7 +35,12 @@
                            rows="20"
                            th:placeholder="#{create.blog.content}"
                            th:field="*{content}"
-                           th:classappend=" ${#fields.hasErrors('content') ? 'is-invalid' : ''}"></textarea><br/>
+                           th:classappend=" ${#fields.hasErrors('content') ? 'is-invalid' : ''}"
+                              aria-describedby="contentValidation"></textarea>
+                    <div class="invalid-feedback"
+                         id="contentValidation"
+                         th:if="${#fields.hasErrors('content')}"
+                         th:errors="*{content}">ERROR</div><br/>
                 </div>
 
                 <button class="btn btn-secondary" type="submit" th:text="#{create.blog.submit}"></button>
