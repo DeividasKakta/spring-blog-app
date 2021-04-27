@@ -13,14 +13,24 @@
     </article>
 
     <div>
-        <form class="row">
+        <form class="row" method="POST" th:object="${comment}">
             <p class="fw-bold" th:text="#{create.comment.title}"></p>
             <div class="col-4">
                 <textarea class="form-control"
                           rows="3"
-                          th:placeholder="#{create.comment.placeholder}"></textarea>
+                          th:placeholder="#{create.comment.placeholder}"
+                          th:field="*{message}"
+                          th:classappend=" ${#fields.hasErrors('message') ? 'is-invalid' : ''}"
+                          aria-describedby="messageValidation">
+                </textarea>
+                <div class="invalid-feedback"
+                     id="messageValidation"
+                     th:if="${#fields.hasErrors('message')}"
+                     th:errors="*{message}">ERROR</div>
                 <button class="btn btn-outline-secondary my-2"
-                        th:text="#{create.comment.submit}"></button>
+                        type="submit"
+                        th:text="#{create.comment.submit}">
+                </button>
             </div>
         </form>
     </div>
@@ -28,10 +38,12 @@
 
     <div class="row">
         <ul class="list-group col-6">
-            <li class="list-group-item d-flex justify-content-between align-items-start">
+            <li class="list-group-item d-flex justify-content-between align-items-start"
+                th:each="comm : ${comments}">
                 <div class="ms-2 me-auto">
-                    <div class="fw-bold">Author</div>
-                    <p>Comment text</p>
+                    <div class="fw-bold"
+                         th:text="${comm.username}">Author</div>
+                    <p th:text="${comm.message}">Comment text</p>
                 </div>
                 <button class="btn btn-outline-danger">Remove</button>
             </li>

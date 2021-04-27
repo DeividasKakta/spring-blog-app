@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Getter
@@ -12,9 +13,10 @@ import java.util.Date;
 @Table(name = "COMMENTS")
 public class Comment extends BaseEntity {
 
+    @NotBlank
     private String message;
 
-    private String username;
+    private String username = "Test";
 
     private Date date = new Date();
 

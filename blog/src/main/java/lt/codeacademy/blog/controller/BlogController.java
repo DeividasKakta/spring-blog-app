@@ -2,7 +2,9 @@ package lt.codeacademy.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.model.Blog;
+import lt.codeacademy.blog.model.Comment;
 import lt.codeacademy.blog.service.BlogService;
+import lt.codeacademy.blog.service.CommentService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +25,7 @@ import java.util.UUID;
 public class BlogController {
 
     private final BlogService blogService;
+    private final CommentService commentService;
 
     @GetMapping
     public String getBlogs(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable,
@@ -52,7 +55,20 @@ public class BlogController {
     @GetMapping("{blogId}")
     public String openBlog(@PathVariable UUID blogId, Model model) {
         model.addAttribute("blog", blogService.getBlogById(blogId));
-
+        model.addAttribute("comments", commentService.getCommentsByBlogId(blogId));
+        model.addAttribute("comment", new Comment());
         return "blog";
+    }
+
+    @PostMapping("{blogId}")
+    public String createComment(@PathVariable UUID blogId, @Valid Comment comment, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "blog";
+        }
+
+        Blog blog = blogService.getBlogById(blogId);
+        commentService.addComment(blog, comment);
+
+        return "redirect:/blogs/{blogId}";
     }
 }
