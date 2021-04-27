@@ -10,7 +10,10 @@
         <div th:if="${not blogPage.hasContent()}" th:text="#{blog.list.empty}">No content</div>
         <div class="container" th:if="${blogPage.hasContent()}">
             <article class="blog-post" th:each="blog : ${blogPage.content}">
-                <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
+                <h2 class="blog-post-title">
+                    <a class="text-decoration-none link-secondary"
+                       th:href="@{/blogs/{blogId}(blogId=${blog.id})}"
+                       th:text="${blog.title}">Blog title</a></h2>
                 <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
                 <p th:text="${blog.content}">Content</p>
             </article>
