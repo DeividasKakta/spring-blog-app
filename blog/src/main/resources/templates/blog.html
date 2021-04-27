@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/mainLayout :: head(title=#{blog.title})"></head>
+<body>
+
+<header th:replace="fragments/mainLayout :: header"></header>
+
+<div class="container">
+    <article class="blog-post">
+        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
+        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+        <p th:text="${blog.content}">Content</p>
+    </article>
+
+    <div>
+        <form class="row">
+            <p class="fw-bold" th:text="#{create.comment.title}"></p>
+            <div class="col-4">
+                <textarea class="form-control"
+                          rows="3"
+                          th:placeholder="#{create.comment.placeholder}"></textarea>
+                <button class="btn btn-outline-secondary my-2"
+                        th:text="#{create.comment.submit}"></button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="row">
+        <ul class="list-group col-6">
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">Author</div>
+                    <p>Comment text</p>
+                </div>
+                <button class="btn btn-outline-danger">Remove</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
