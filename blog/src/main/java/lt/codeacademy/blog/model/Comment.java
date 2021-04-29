@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Getter
@@ -14,6 +15,7 @@ import java.util.Date;
 public class Comment extends BaseEntity {
 
     @NotBlank
+    @Size(max = 255)
     private String message;
 
     private String username = "Test";

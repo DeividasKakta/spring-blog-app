@@ -6,11 +6,11 @@
 <header th:replace="fragments/mainLayout :: header"></header>
 
 <div class="container">
-    <article class="blog-post">
-        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
-        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
-        <p th:text="${blog.content}">Content</p>
-    </article>
+<!--    <article class="blog-post">-->
+<!--        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>-->
+<!--        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>-->
+<!--        <p th:text="${blog.content}">Content</p>-->
+<!--    </article>-->
 
     <div>
         <form class="row" method="POST" th:object="${comment}">

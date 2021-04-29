@@ -29,7 +29,7 @@ public class BlogController {
 
     @GetMapping
     public String getBlogs(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable,
-                              Model model) {
+                           Model model) {
         model.addAttribute("blogPage", blogService.getAllBlogsPaginated(pageable));
 
         return "blogs";
@@ -57,17 +57,18 @@ public class BlogController {
         model.addAttribute("blog", blogService.getBlogById(blogId));
         model.addAttribute("comments", commentService.getCommentsByBlogId(blogId));
         model.addAttribute("comment", new Comment());
+
         return "blog";
     }
 
     @PostMapping("{blogId}")
     public String createComment(@PathVariable UUID blogId, @Valid Comment comment, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+
             return "blog";
         }
 
-        Blog blog = blogService.getBlogById(blogId);
-        commentService.addComment(blog, comment);
+        commentService.addComment(blogService.getBlogById(blogId), comment);
 
         return "redirect:/blogs/{blogId}";
     }
