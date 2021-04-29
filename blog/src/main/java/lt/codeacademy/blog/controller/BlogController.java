@@ -11,10 +11,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -48,6 +45,27 @@ public class BlogController {
             return "createBlog";
         }
         blogService.addBlog(blog);
+
+        return "redirect:/blogs";
+    }
+
+    @GetMapping("/update")
+    public String openBlogUpdate(@RequestParam UUID id, Model model) {
+        model.addAttribute("blog", blogService.getBlogById(id));
+
+        return "createBlog";
+    }
+
+    @PostMapping("/update")
+    public String updateBlog(Blog blog) {
+        blogService.updateBlog(blog);
+
+        return "redirect:/blogs";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        blogService.deleteBlog(id);
 
         return "redirect:/blogs";
     }

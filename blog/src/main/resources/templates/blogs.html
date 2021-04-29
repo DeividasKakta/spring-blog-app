@@ -10,10 +10,27 @@
         <div th:if="${not blogPage.hasContent()}" th:text="#{blog.list.empty}">No content</div>
         <div class="container" th:if="${blogPage.hasContent()}">
             <article class="blog-post" th:each="blog : ${blogPage.content}">
-                <h2 class="blog-post-title">
-                    <a class="text-decoration-none link-secondary"
-                       th:href="@{/blogs/{blogId}(blogId=${blog.id})}"
-                       th:text="${blog.title}">Blog title</a></h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="blog-post-title">
+                        <a class="text-decoration-none link-secondary"
+                           th:href="@{/blogs/{blogId}(blogId=${blog.id})}"
+                           th:text="${blog.title}">
+                            Blog title
+                        </a>
+                    </h2>
+                    <div>
+                        <a class="text-decoration-none text-success fs-2"
+                           th:href="@{/blogs/update(id=${blog.id})}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <a class="text-decoration-none text-danger fs-2"
+                           th:href="@{/blogs/delete(id=${blog.id})}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
                 <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
                 <p th:text="${blog.content}">Content</p>
             </article>

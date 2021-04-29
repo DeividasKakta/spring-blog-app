@@ -32,4 +32,16 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.findById(blogId)
                 .orElseThrow(BlogNotFoundException::new);
     }
+
+    @Override
+    public void updateBlog(Blog blog) {
+        blogRepository.save(blog);
+    }
+
+    @Override
+    public void deleteBlog(UUID id) {
+        blogRepository.deleteById(id);
+    }
+
+
 }

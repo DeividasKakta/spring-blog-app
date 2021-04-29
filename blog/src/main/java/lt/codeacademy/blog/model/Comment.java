@@ -2,6 +2,8 @@ package lt.codeacademy.blog.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -24,6 +26,7 @@ public class Comment extends BaseEntity {
 
     @JoinColumn
     @ManyToOne(cascade = CascadeType.ALL)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Blog blog;
 
 }
