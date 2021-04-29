@@ -12,4 +12,6 @@ public interface CommentService {
 
     List<Comment> getCommentsByBlogId(UUID blogId);
 
+    void deleteComment(UUID id);
+
 }

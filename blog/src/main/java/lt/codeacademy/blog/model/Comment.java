@@ -25,7 +25,7 @@ public class Comment extends BaseEntity {
     private Date date = new Date();
 
     @JoinColumn
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Blog blog;
 

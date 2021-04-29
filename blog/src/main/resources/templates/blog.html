@@ -38,18 +38,31 @@
 
     <div class="row">
         <ul class="list-group col-6">
-            <li class="list-group-item d-flex justify-content-between align-items-start"
+            <li class="list-group-item align-items-start"
                 th:each="comm : ${comments}">
-                <div class="ms-2 me-auto">
-                    <div class="fw-bold"
-                         th:text="${comm.username}">Author</div>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-bold" th:text="${comm.username}">Author</div>
+                        <div>
+                            <a class="text-decoration-none text-success fs-5"
+                               th:href="@{/blogs/{blogId}(blogId=${blog.id})}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+
+                            <a class="text-decoration-none text-danger fs-5"
+                               th:href="@{/blogs/{blogId}/comments/delete(blogId=${blog.id}, id=${comm.id})}">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+
                     <p th:text="${comm.message}">Comment text</p>
-                </div>
-                <button class="btn btn-outline-danger">Remove</button>
+
             </li>
         </ul>
     </div>
 </div>
+
 
 </body>
 </html>

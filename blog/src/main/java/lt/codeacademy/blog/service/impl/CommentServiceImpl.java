@@ -26,4 +26,9 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getCommentsByBlogId(UUID blogId) {
         return commentRepository.findCommentsByBlogId(blogId);
     }
+
+    @Override
+    public void deleteComment(UUID id) {
+        commentRepository.deleteById(id);
+    }
 }
