@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/mainLayout :: head(title=#{blog.title})"></head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
 <header th:replace="fragments/mainLayout :: header"></header>
 
-<div class="container">
-<!--    <article class="blog-post">-->
-<!--        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>-->
-<!--        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>-->
-<!--        <p th:text="${blog.content}">Content</p>-->
-<!--    </article>-->
+<main class="container flex-grow-1">
+    <article class="blog-post">
+        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
+        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+        <p th:text="${blog.content}">Content</p>
+    </article>
 
     <div>
-        <form class="row" method="POST" th:object="${comment}">
+        <form class="row" method="POST" th:object="${comment}" th:action="@{/blogs/{blogId}(blogId=${blog.id})}">
             <p class="fw-bold" th:text="#{create.comment.title}"></p>
             <div class="col-4">
                 <textarea class="form-control"
@@ -37,7 +37,7 @@
 
 
     <div class="row">
-        <ul class="list-group col-6">
+        <ul class="m-2 list-group col-6">
             <li class="list-group-item align-items-start"
                 th:each="comm : ${comments}">
 
@@ -56,13 +56,14 @@
                         </div>
                     </div>
 
-                    <p th:text="${comm.message}">Comment text</p>
+                    <p class="text-break" th:text="${comm.message}">Comment text</p>
 
             </li>
         </ul>
     </div>
-</div>
+</main>
 
+<footer th:replace="fragments/mainLayout :: footer"></footer>
 
 </body>
 </html>
