@@ -71,7 +71,7 @@ public class PostController {
     }
 
     @GetMapping("{postId}")
-    public String openBlog(@PathVariable UUID postId, Model model) {
+    public String openPost(@PathVariable UUID postId, Model model) {
         model.addAttribute("post", postService.getPostById(postId));
         model.addAttribute("comments", commentService.getCommentsByPostId(postId));
         model.addAttribute("comment", new Comment());
@@ -80,9 +80,10 @@ public class PostController {
     }
 
     @PostMapping("{postId}")
-    public String createComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult) {
+    public String createComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-
+            model.addAttribute("post", postService.getPostById(postId));
+            model.addAttribute("comments", commentService.getCommentsByPostId(postId));
             return "post";
         }
 
