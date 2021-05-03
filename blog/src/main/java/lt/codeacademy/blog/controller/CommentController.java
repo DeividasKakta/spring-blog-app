@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/blogs")
+@RequestMapping("/posts")
 @RequiredArgsConstructor
 public class CommentController {
 
     private final CommentService commentService;
 
-    @GetMapping("{blogId}/comments/delete")
-    public String delete(@PathVariable UUID blogId, @RequestParam UUID id) {
+    @GetMapping("{postId}/comments/delete")
+    public String delete(@PathVariable UUID postId, @RequestParam UUID id) {
         commentService.deleteComment(id);
 
-        return "redirect:/blogs/{blogId}";
+        return "redirect:/posts/{postId}";
     }
 
 

@@ -27,6 +27,6 @@ public class Comment extends BaseEntity {
     @JoinColumn
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Blog blog;
+    private Post post;
 
 }

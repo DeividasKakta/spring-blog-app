@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/mainLayout :: head(title=#{blog.title})"></head>
+<head th:replace="fragments/mainLayout :: head(title=#{post.title})"></head>
 <body class="d-flex flex-column min-vh-100">
 
 <header th:replace="fragments/mainLayout :: header"></header>
 
 <main class="container flex-grow-1">
-    <article class="blog-post">
-        <h2 class="blog-post-title" th:text="${blog.title}">Blog title</h2>
-        <p class="blog-post-meta" th:text="${blog.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
-        <p th:text="${blog.content}">Content</p>
+    <article class="post-post">
+        <h2 class="post-post-title" th:text="${post.title}">Blog title</h2>
+        <p class="post-post-meta" th:text="${post.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+        <p th:text="${post.content}">Content</p>
     </article>
 
     <div>
-        <form class="row" method="POST" th:object="${comment}" th:action="@{/blogs/{blogId}(blogId=${blog.id})}">
+        <form class="row" method="POST" th:object="${comment}" th:action="@{/posts/{postId}(postId=${post.id})}">
             <p class="fw-bold" th:text="#{create.comment.title}"></p>
             <div class="col-4">
                 <textarea class="form-control"
@@ -45,12 +45,12 @@
                         <div class="fw-bold" th:text="${comm.username}">Author</div>
                         <div>
                             <a class="text-decoration-none text-success fs-5"
-                               th:href="@{/blogs/{blogId}(blogId=${blog.id})}">
+                               th:href="@{/posts/{postId}(postId=${post.id})}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                             <a class="text-decoration-none text-danger fs-5"
-                               th:href="@{/blogs/{blogId}/comments/delete(blogId=${blog.id}, id=${comm.id})}">
+                               th:href="@{/posts/{postId}/comments/delete(postId=${post.id}, id=${comm.id})}">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>

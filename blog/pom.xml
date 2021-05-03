@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>lt.codeacademy</groupId>
-    <artifactId>blog</artifactId>
+    <artifactId>post</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>blog</name>
+    <name>post</name>
     <description>Blog application</description>
     <properties>
         <java.version>11</java.version>

@@ -1,6 +1,6 @@
 package lt.codeacademy.blog.service;
 
-import lt.codeacademy.blog.model.Blog;
+import lt.codeacademy.blog.model.Post;
 import lt.codeacademy.blog.model.Comment;
 
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.UUID;
 
 public interface CommentService {
 
-    void addComment(Blog blog, Comment comment);
+    void addComment(Post post, Comment comment);
 
-    List<Comment> getCommentsByBlogId(UUID blogId);
+    List<Comment> getCommentsByPostId(UUID postId);
 
     void deleteComment(UUID id);
 

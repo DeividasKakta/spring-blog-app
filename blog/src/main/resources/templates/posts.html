@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/mainLayout :: head(title=#{post.title})"></head>
+<body class="d-flex flex-column min-vh-100">
+
+    <header th:replace="fragments/mainLayout :: header"></header>
+
+    <main class="flex-grow-1">
+        <!--Blog content start-->
+        <div th:if="${not postPage.hasContent()}" th:text="#{post.list.empty}">No content</div>
+        <div class="container" th:if="${postPage.hasContent()}">
+
+            <article class="post-post" th:each="post : ${postPage.content}">
+
+                <div class="d-flex justify-content-between">
+                    <h2 class="post-post-title">
+                        <a class="text-decoration-none link-primary"
+                           th:href="@{/posts/{postId}(postId=${post.id})}"
+                           th:text="${post.title}">
+                            Post title
+                        </a>
+                    </h2>
+                    <div>
+                        <a class="text-decoration-none text-success fs-2"
+                           th:href="@{/posts/update(id=${post.id})}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+
+                        <a class="text-decoration-none text-danger fs-2"
+                           th:href="@{/posts/delete(id=${post.id})}">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="post-post-meta" th:text="${post.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+                <p th:text="${post.content}">Content</p>
+                <hr/>
+            </article>
+
+            <!--Pagination start-->
+            <div>
+                <ul class="pagination"
+                    th:with="order=${postPage.sort.iterator().hasNext() ? postPage.sort.iterator().next() : null},
+                    sort=${order.property + ',' + order.direction}">
+                    <li class="page-item"
+                        th:classappend="${postPage.number eq 0  ? 'disabled' : ''}">
+                        <a class="page-link"
+                           th:href="@{/posts(page=${postPage.number} - 1,sort=${sort})}"
+                           th:text="#{pagination.previous}">
+                            Previous
+                        </a>
+                    </li>
+
+                    <li class="page-item"
+                        th:each="pageNumber : ${#numbers.sequence(0, postPage.totalPages - 1)}"
+                        th:classappend="${pageNumber eq (postPage.number) ? 'active' : ''}">
+                        <a class="page-link"
+                           th:href="@{/posts(page=${pageNumber},sort=${sort})}"
+                           th:classappend="${pageNumber eq (postPage.number) ? 'bg-secondary border-secondary' : ''}"
+                           th:text="${pageNumber} + 1">
+                            1
+                        </a>
+                    </li>
+
+                    <li class="page-item"
+                        th:classappend="${postPage.number eq postPage.totalPages - 1  ? 'disabled' : ''}">
+                        <a class="page-link"
+                           th:href="@{/posts(page=${postPage.number} + 1,sort=${sort})}"
+                           th:text="#{pagination.next}">
+                            Next
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <!--Pagination end-->
+
+        </div>
+        <!--Blog content end-->
+
+    </main>
+
+    <footer th:replace="fragments/mainLayout :: footer"></footer>
+
+</body>
+</html>

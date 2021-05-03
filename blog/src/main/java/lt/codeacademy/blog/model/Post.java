@@ -12,8 +12,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "BLOGS")
-public class Blog extends BaseEntity {
+@Table(name = "POSTS")
+public class Post extends BaseEntity {
 
     @NotBlank
     private String title;
