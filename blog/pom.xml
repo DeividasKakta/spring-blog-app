@@ -39,18 +39,6 @@
             <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
-        <!--Database drivers-->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
         <!--Additional helpers-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -82,5 +70,40 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profile-name>development</profile-name>
+            </properties>
+
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>com.h2database</groupId>
+                    <artifactId>h2</artifactId>
+                </dependency>
+            </dependencies>
+
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile-name>production</profile-name>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
 </project>
