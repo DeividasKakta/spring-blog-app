@@ -70,25 +70,4 @@ public class PostController {
         return "redirect:/posts";
     }
 
-    @GetMapping("{postId}")
-    public String openPost(@PathVariable UUID postId, Model model) {
-        model.addAttribute("post", postService.getPostById(postId));
-        model.addAttribute("comments", commentService.getCommentsByPostId(postId));
-        model.addAttribute("comment", new Comment());
-
-        return "post";
-    }
-
-    @PostMapping("{postId}")
-    public String createComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("post", postService.getPostById(postId));
-            model.addAttribute("comments", commentService.getCommentsByPostId(postId));
-            return "post";
-        }
-
-        commentService.addComment(postService.getPostById(postId), comment);
-
-        return "redirect:/posts/{postId}";
-    }
 }

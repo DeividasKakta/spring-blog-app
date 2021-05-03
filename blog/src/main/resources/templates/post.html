@@ -13,7 +13,7 @@
     </article>
 
     <div>
-        <form class="row" method="POST" th:object="${comment}" th:action="@{/posts/{postId}(postId=${post.id})}">
+        <form class="row" method="POST" th:object="${comment}">
             <p class="fw-bold" th:text="#{create.comment.title}"></p>
             <div class="col-4">
                 <textarea class="form-control"
@@ -45,7 +45,7 @@
                         <div class="fw-bold" th:text="${comm.username}">Author</div>
                         <div>
                             <a class="text-decoration-none text-success fs-5"
-                               th:href="@{/posts/{postId}(postId=${post.id})}">
+                               th:href="@{/posts/{postId}/comments/update(postId=${post.id}, id=${comm.id})}">
                                 <i class="fas fa-edit"></i>
                             </a>
 

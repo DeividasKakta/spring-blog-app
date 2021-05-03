@@ -1,6 +1,7 @@
 package lt.codeacademy.blog.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.blog.exception.CommentNotFoundException;
 import lt.codeacademy.blog.model.Post;
 import lt.codeacademy.blog.model.Comment;
 import lt.codeacademy.blog.repository.CommentRepository;
@@ -30,5 +31,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public void deleteComment(UUID id) {
         commentRepository.deleteById(id);
+    }
+
+    @Override
+    public Comment getCommentById(UUID id) {
+        return commentRepository.findById(id)
+                .orElseThrow(CommentNotFoundException::new);
+    }
+
+    @Override
+    public void updateComment(Comment comment) {
+        commentRepository.save(comment);
     }
 }
