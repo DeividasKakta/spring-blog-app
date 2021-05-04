@@ -17,6 +17,7 @@
         <java.version>11</java.version>
     </properties>
     <dependencies>
+        <!--Starter-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -33,17 +34,21 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!--Additional helpers-->
+
+        <!--Additional libraries-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
 
         <!--Testing-->

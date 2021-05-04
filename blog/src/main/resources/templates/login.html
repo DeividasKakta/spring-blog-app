@@ -7,7 +7,7 @@
 
 <main class="container flex-grow-1">
     <div class="form-signin">
-        <form class="text-center">
+        <form class="text-center" method="POST" th:action="@{/login}">
             <img class="mb-4"
                  th:src="@{/images/logo_tr.png}"
                  th:alt="#{login.logo.alt}">
@@ -15,10 +15,13 @@
                 th:text="#{login.header}">
             </h1>
 
+            <div th:if="${param.error ne null}" class="alert alert-danger" role="alert">Bad username or password</div>
+
             <div class="form-floating">
                 <input type="text"
                        class="form-control rounded-0 rounded-top border-bottom-0"
                        id="loginUsername"
+                       name="username"
                        th:placeholder="#{login.username}">
                 <label for="loginUsername"
                        th:text="#{login.username}">
@@ -28,6 +31,7 @@
                 <input type="password"
                        class="form-control rounded-0 rounded-bottom"
                        id="loginPassword"
+                       name="password"
                        th:placeholder="#{login.password}">
                 <label for="loginPassword"
                        th:text="#{login.password}">

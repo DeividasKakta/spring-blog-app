@@ -2,9 +2,7 @@ package lt.codeacademy.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.model.Post;
-import lt.codeacademy.blog.model.Comment;
 import lt.codeacademy.blog.service.PostService;
-import lt.codeacademy.blog.service.CommentService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -22,7 +20,6 @@ import java.util.UUID;
 public class PostController {
 
     private final PostService postService;
-    private final CommentService commentService;
 
     @GetMapping
     public String getPosts(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable,

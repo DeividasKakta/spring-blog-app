@@ -26,3 +26,16 @@ INSERT INTO POSTS (id, title, content, date) values
     ('f844e470-3a9a-4d46-8af8-45d95d455d16', 'My ninth post',
      'Eget nulla facilisi etiam dignissim diam quis enim. Proin gravida hendrerit lectus a. Ultrices sagittis orci a scelerisque purus semper eget. Bibendum at varius vel pharetra vel turpis nunc eget lorem. Amet facilisis magna etiam tempor orci eu lobortis elementum. Leo urna molestie at elementum eu facilisis sed. Est ante in nibh mauris cursus. Viverra maecenas accumsan lacus vel facilisis. Scelerisque eu ultrices vitae auctor eu augue ut. At tellus at urna condimentum mattis pellentesque id nibh. Posuere morbi leo urna molestie at elementum. Id consectetur purus ut faucibus pulvinar elementum integer enim. Massa id neque aliquam vestibulum morbi. Nisl suscipit adipiscing bibendum est ultricies integer. Massa placerat duis ultricies lacus sed. Justo nec ultrices dui sapien eget mi proin sed libero. In cursus turpis massa tincidunt dui ut ornare. Tortor vitae purus faucibus ornare suspendisse sed. Maecenas pharetra convallis posuere morbi leo urna molestie at. Mi ipsum faucibus vitae aliquet nec ullamcorper sit amet.',
      '2021-04-02');
+
+INSERT INTO USERS (id, username, password) VALUES
+    ('d3cf15bc-61bc-4681-b0d6-4a94bd557448', 'admin', '{bcrypt}$2y$12$Zl06IDjndjLO3O.QWsQ46eyF1SwSxW18rEO6pY8es1AGmRynQY8ES'),
+    ('d3cf15bc-64bc-4681-b0d6-4a14bd557448', 'user', '{bcrypt}$2y$12$Z5Rz0tZC2YVpustgrWkoxONrqHjBjmEM1VFH8g5MPYMI0oD63Pzka');
+
+INSERT INTO ROLES (id, role) VALUES
+    ('56ba814c-0b7f-4bc8-8d1d-49cd40f78fd1', 'ADMIN'),
+    ('9d438afb-3178-4423-b9e5-b7e84a13451e', 'USER');
+
+INSERT INTO USERS_ROLES (user_id, roles_id) VALUES
+    ('d3cf15bc-61bc-4681-b0d6-4a94bd557448', '56ba814c-0b7f-4bc8-8d1d-49cd40f78fd1'),
+    ('d3cf15bc-61bc-4681-b0d6-4a94bd557448', '9d438afb-3178-4423-b9e5-b7e84a13451e'),
+    ('d3cf15bc-64bc-4681-b0d6-4a14bd557448', '9d438afb-3178-4423-b9e5-b7e84a13451e');
