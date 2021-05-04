@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("/public/posts")
 @RequiredArgsConstructor
 public class CommentController {
 

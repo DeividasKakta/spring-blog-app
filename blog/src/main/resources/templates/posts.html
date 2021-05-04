@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/mainLayout :: head(title=#{post.title})"></head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -15,19 +15,19 @@
                 <div class="d-flex justify-content-between">
                     <h2 class="post-post-title">
                         <a class="text-decoration-none link-primary"
-                           th:href="@{/posts/{postId}(postId=${post.id})}"
+                           th:href="@{/public/posts/{postId}(postId=${post.id})}"
                            th:text="${post.title}">
                             Post title
                         </a>
                     </h2>
-                    <div>
+                    <div sec:authorize="hasRole('ADMIN')">
                         <a class="text-decoration-none text-success fs-2"
-                           th:href="@{/posts/update(id=${post.id})}">
+                           th:href="@{/public/posts/update(id=${post.id})}">
                             <i class="fas fa-edit"></i>
                         </a>
 
                         <a class="text-decoration-none text-danger fs-2"
-                           th:href="@{/posts/delete(id=${post.id})}">
+                           th:href="@{/public/posts/delete(id=${post.id})}">
                             <i class="fas fa-trash-alt"></i>
                         </a>
                     </div>
