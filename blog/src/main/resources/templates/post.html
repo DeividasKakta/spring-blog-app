@@ -13,7 +13,9 @@
     </article>
 
     <div>
-        <form class="row" method="POST" th:object="${comment}">
+        <form class="row" method="POST" th:object="${comment}" th:action="@{/public/posts/{postId}(postId=${post.id})}">
+            <input type="hidden" th:field="*{id}" />
+
             <p class="fw-bold" th:text="#{create.comment.title}"></p>
             <div class="col-4">
                 <textarea class="form-control"
@@ -45,12 +47,12 @@
                         <div class="fw-bold" th:text="${comm.username}">Author</div>
                         <div>
                             <a class="text-decoration-none text-success fs-5"
-                               th:href="@{/posts/{postId}/comments/update(postId=${post.id}, id=${comm.id})}">
+                               th:href="@{/public/posts/{postId}/comments/update(postId=${post.id}, id=${comm.id})}">
                                 <i class="fas fa-edit"></i>
                             </a>
 
                             <a class="text-decoration-none text-danger fs-5"
-                               th:href="@{/posts/{postId}/comments/delete(postId=${post.id}, id=${comm.id})}">
+                               th:href="@{/public/posts/{postId}/comments/delete(postId=${post.id}, id=${comm.id})}">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </div>

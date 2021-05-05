@@ -32,39 +32,46 @@ public class PostController {
     @GetMapping("/create")
     public String openCreatePost(Model model) {
         model.addAttribute("post", new Post());
+        model.addAttribute("action", "create");
 
         return "createPost";
     }
 
     @PostMapping("/create")
-    public String createPost(@Valid Post post, BindingResult bindingResult) {
+    public String createPost(@Valid Post post, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("action", "create");
             return "createPost";
         }
         postService.addPost(post);
 
-        return "redirect:/posts";
+        return "redirect:/public/posts";
     }
 
     @GetMapping("/update")
     public String openPostUpdate(@RequestParam UUID id, Model model) {
         model.addAttribute("post", postService.getPostById(id));
+        model.addAttribute("action", "update");
 
         return "createPost";
     }
 
     @PostMapping("/update")
-    public String updatePost(Post post) {
+    public String updatePost(@Valid Post post, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("action", "update");
+            return "createPost";
+        }
         postService.updatePost(post);
 
-        return "redirect:/posts";
+        return "redirect:/public/posts";
     }
 
     @GetMapping("/delete")
     public String delete(@RequestParam UUID id) {
         postService.deletePost(id);
 
-        return "redirect:/posts";
+        return "redirect:/public/posts";
     }
 
 }

@@ -9,7 +9,12 @@
     <div class="row">
         <div class="col-md-6 offset-md-3 p-3 bg-light border rounded border-secondary">
 
-            <form class="row" method="POST" th:object="${post}">
+            <form class="row"
+                  method="POST"
+                  th:object="${post}"
+                  th:action="${action} == 'create' ? @{/public/posts/create} : @{/public/posts/update}">
+
+                <input type="hidden" th:field="*{id}" />
 
                 <label class="col-sm-3 col-form-label"
                        th:text="#{create.post.postTitle} + ':'">
@@ -32,10 +37,10 @@
                 </label>
                 <div class="col-sm-9">
                     <textarea class="form-control"
-                           rows="20"
-                           th:placeholder="#{create.post.content}"
-                           th:field="*{content}"
-                           th:classappend=" ${#fields.hasErrors('content') ? 'is-invalid' : ''}"
+                              rows="20"
+                              th:placeholder="#{create.post.content}"
+                              th:field="*{content}"
+                              th:classappend=" ${#fields.hasErrors('content') ? 'is-invalid' : ''}"
                               aria-describedby="contentValidation"></textarea>
                     <div class="invalid-feedback"
                          id="contentValidation"

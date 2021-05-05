@@ -38,7 +38,7 @@ public class CommentController {
 
         commentService.addComment(postService.getPostById(postId), comment);
 
-        return "redirect:/posts/{postId}";
+        return "redirect:/public/posts/{postId}";
     }
 
     @GetMapping("{postId}/comments/update")
@@ -60,14 +60,14 @@ public class CommentController {
         comment.setPost(postService.getPostById(postId));
         commentService.updateComment(comment);
 
-        return "redirect:/posts/{postId}";
+        return "redirect:/public/posts/{postId}";
     }
 
     @GetMapping("{postId}/comments/delete")
     public String deleteComment(@PathVariable UUID postId, @RequestParam UUID id) {
         commentService.deleteComment(id);
 
-        return "redirect:/posts/{postId}";
+        return "redirect:/public/posts/{postId}";
     }
 
     private void setPostModel(Model model, UUID postId) {
