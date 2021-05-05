@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 @Setter
 @Getter
 @Password
-public class UserRegistration {
+public class UserDto {
 
     @NotBlank
     @Size(min = 6, max = 20)

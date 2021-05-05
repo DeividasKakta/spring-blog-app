@@ -8,7 +8,7 @@
 <main class="container flex-grow-1">
 
     <div class="form-signin">
-        <form class="text-center" method="POST" th:action="@{/register}">
+        <form class="text-center" method="POST" th:object="${userDto}" th:action="@{/register}">
             <img class="mb-4"
                  th:src="@{/images/logo_tr.png}"
                  th:alt="#{login.logo.alt}">
@@ -20,6 +20,7 @@
                 <input type="text"
                        class="form-control rounded-0 rounded-top border-bottom-0"
                        id="registerUsername"
+                       th:field="*{username}"
                        th:placeholder="#{login.username}">
                 <label for="registerUsername"
                        th:text="#{login.username}">
@@ -30,6 +31,7 @@
                 <input type="password"
                        class="form-control rounded-0 border-bottom-0"
                        id="registerPassword"
+                       th:field="*{password}"
                        th:placeholder="#{login.password}">
                 <label for="registerPassword"
                        th:text="#{login.password}">
@@ -40,6 +42,7 @@
                 <input type="password"
                        class="form-control rounded-0 rounded-bottom"
                        id="repeatPassword"
+                       th:field="*{repeatPassword}"
                        th:placeholder="#{register.password.repeat}">
                 <label for="repeatPassword"
                        th:text="#{register.password.repeat}">
