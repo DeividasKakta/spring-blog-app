@@ -1,6 +1,7 @@
 package lt.codeacademy.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.model.UserDto;
 import lt.codeacademy.blog.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -34,14 +35,15 @@ public class UserController {
             return "register";
         }
 
-        userService.convertToUserAndSave(userDto);
+        User user = userService.convertUserDtoToUser(userDto);
+        userService.addUser(user);
 
         return "redirect:/public/posts";
     }
 
-    @GetMapping("/login")
-    public String openLogin() {
-
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String openLogin() {
+//
+//        return "login";
+//    }
 }

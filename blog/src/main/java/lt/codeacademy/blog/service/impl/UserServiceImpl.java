@@ -37,21 +37,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void addUser(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public boolean isUsernameFree(String username) {
         return userRepository.findUserByUsername(username) == null;
     }
 
     @Override
-    public void convertToUserAndSave(UserDto userDto) {
+    public User convertUserDtoToUser(UserDto userDto) {
         User user = new User();
+
         user.setUsername(userDto.getUsername());
         user.setPassword(encoder.encode(userDto.getPassword()));
+        user.setRoles(roleService.addUserRoleToSet());
 
-        Set<Role> roles = new HashSet<>();
-        roleService.addUserRoleToSet(roles);
-
-        user.setRoles(roles);
-
-        userRepository.save(user);
+        return user;
     }
 }
