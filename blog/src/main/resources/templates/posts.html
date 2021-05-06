@@ -46,7 +46,7 @@
                     <li class="page-item"
                         th:classappend="${postPage.number eq 0  ? 'disabled' : ''}">
                         <a class="page-link"
-                           th:href="@{/posts(page=${postPage.number} - 1,sort=${sort})}"
+                           th:href="@{/public/posts(page=${postPage.number} - 1,sort=${sort})}"
                            th:text="#{pagination.previous}">
                             Previous
                         </a>
@@ -56,8 +56,7 @@
                         th:each="pageNumber : ${#numbers.sequence(0, postPage.totalPages - 1)}"
                         th:classappend="${pageNumber eq (postPage.number) ? 'active' : ''}">
                         <a class="page-link"
-                           th:href="@{/posts(page=${pageNumber},sort=${sort})}"
-                           th:classappend="${pageNumber eq (postPage.number) ? 'bg-secondary border-secondary' : ''}"
+                           th:href="@{/public/posts(page=${pageNumber},sort=${sort})}"
                            th:text="${pageNumber} + 1">
                             1
                         </a>
@@ -66,7 +65,7 @@
                     <li class="page-item"
                         th:classappend="${postPage.number eq postPage.totalPages - 1  ? 'disabled' : ''}">
                         <a class="page-link"
-                           th:href="@{/posts(page=${postPage.number} + 1,sort=${sort})}"
+                           th:href="@{/public/posts(page=${postPage.number} + 1,sort=${sort})}"
                            th:text="#{pagination.next}">
                             Next
                         </a>
