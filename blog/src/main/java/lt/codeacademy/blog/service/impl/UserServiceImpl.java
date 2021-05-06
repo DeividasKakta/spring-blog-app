@@ -38,11 +38,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUsernameFree(String username) {
-        return userRepository.findUserByUsername(username) == null;
-    }
-
-    @Override
     public User convertUserDtoToUser(UserDto userDto) {
         User user = new User();
 

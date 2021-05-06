@@ -27,10 +27,6 @@ public class UserController {
 
     @PostMapping("/register")
     public String register(@Valid UserDto userDto, BindingResult bindingResult) {
-        if (!userService.isUsernameFree(userDto.getUsername())) {
-            return "register";
-        }
-
         if (bindingResult.hasErrors()) {
             return "register";
         }

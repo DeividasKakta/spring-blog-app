@@ -13,8 +13,6 @@ public interface UserService extends UserDetailsService {
 
     void addUser(User user);
 
-    boolean isUsernameFree(String username);
-
     User convertUserDtoToUser(UserDto userDto);
 
 }
