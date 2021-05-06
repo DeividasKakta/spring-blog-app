@@ -12,7 +12,14 @@ public class PasswordValidator implements ConstraintValidator<Password, UserDto>
     @Override
     public boolean isValid(UserDto userDto, ConstraintValidatorContext context) {
         try {
-            return userDto.getPassword().equals(userDto.getRepeatPassword());
+            boolean isValid = userDto.getPassword().equals(userDto.getRepeatPassword());
+            if (!isValid) {
+                context.disableDefaultConstraintViolation();
+                context.buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                        .addPropertyNode("repeatPassword")
+                        .addConstraintViolation();
+            }
+            return isValid;
         } catch (Exception e) {
             log.warn("Invalid password: " + e.getMessage());
         }

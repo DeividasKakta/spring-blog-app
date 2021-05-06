@@ -13,8 +13,7 @@ import javax.validation.constraints.Size;
 @Password
 public class UserDto {
 
-    @NotBlank
-    @Size(min = 6, max = 20)
+    @Size(min = 6, max = 20, message = "{validation.size.username}")
     private String username;
 
     @NotBlank

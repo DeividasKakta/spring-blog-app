@@ -21,7 +21,8 @@
                 </label>
                 <div class="col-sm-9">
                     <input class="form-control"
-                           type="text" name="name"
+                           type="text"
+                           name="name"
                            th:placeholder="#{create.post.postTitle}"
                            th:field="*{title}"
                            th:classappend=" ${#fields.hasErrors('title') ? 'is-invalid' : ''}"

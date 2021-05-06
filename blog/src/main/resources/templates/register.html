@@ -21,7 +21,14 @@
                        class="form-control rounded-0 rounded-top border-bottom-0"
                        id="registerUsername"
                        th:field="*{username}"
-                       th:placeholder="#{login.username}">
+                       th:placeholder="#{login.username}"
+                       th:classappend=" ${#fields.hasErrors('username') ? 'is-invalid' : ''}"
+                       aria-describedby="usernameValidation">
+                <div class="invalid-feedback border-danger mt-0 border-top text-start p-2"
+                     id="usernameValidation"
+                     th:if="${#fields.hasErrors('username')}"
+                     th:errors="*{username}">
+                </div>
                 <label for="registerUsername"
                        th:text="#{login.username}">
                 </label>
@@ -32,7 +39,14 @@
                        class="form-control rounded-0 border-bottom-0"
                        id="registerPassword"
                        th:field="*{password}"
-                       th:placeholder="#{login.password}">
+                       th:placeholder="#{login.password}"
+                       th:classappend=" ${#fields.hasErrors('password') ? 'is-invalid' : ''}"
+                       aria-describedby="passwordValidation">
+                <div class="invalid-feedback border-danger mt-0 border-top text-start p-2"
+                     id="passwordValidation"
+                     th:if="${#fields.hasErrors('password')}"
+                     th:errors="*{password}">
+                </div>
                 <label for="registerPassword"
                        th:text="#{login.password}">
                 </label>
@@ -43,7 +57,14 @@
                        class="form-control rounded-0 rounded-bottom"
                        id="repeatPassword"
                        th:field="*{repeatPassword}"
-                       th:placeholder="#{register.password.repeat}">
+                       th:placeholder="#{register.password.repeat}"
+                       th:classappend=" ${#fields.hasErrors('repeatPassword') ? 'is-invalid' : ''}"
+                       aria-describedby="repeatPasswordValidation">
+                <div class="invalid-feedback mt-0 text-start p-2"
+                     id="repeatPasswordValidation"
+                     th:if="${#fields.hasErrors('repeatPassword')}"
+                     th:errors="*{repeatPassword}">
+                </div>
                 <label for="repeatPassword"
                        th:text="#{register.password.repeat}">
                 </label>
