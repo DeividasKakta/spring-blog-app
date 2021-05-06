@@ -6,6 +6,7 @@ import lt.codeacademy.blog.service.PostService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ public class PostController {
     }
 
     @GetMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String openCreatePost(Model model) {
         model.addAttribute("post", new Post());
         model.addAttribute("action", "create");
@@ -38,6 +40,7 @@ public class PostController {
     }
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
     public String createPost(@Valid Post post, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("action", "create");
@@ -49,6 +52,7 @@ public class PostController {
     }
 
     @GetMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public String openPostUpdate(@RequestParam UUID id, Model model) {
         model.addAttribute("post", postService.getPostById(id));
         model.addAttribute("action", "update");
@@ -57,6 +61,7 @@ public class PostController {
     }
 
     @PostMapping("/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updatePost(@Valid Post post, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("action", "update");
@@ -68,6 +73,7 @@ public class PostController {
     }
 
     @GetMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
     public String delete(@RequestParam UUID id) {
         postService.deletePost(id);
 
