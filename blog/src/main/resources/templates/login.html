@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments/mainLayout :: head(title=#{login.title})"></head>
 <body class="d-flex flex-column min-vh-100">
 
 <header th:replace="fragments/mainLayout :: header"></header>
 
 <main class="container flex-grow-1">
+    <div th:if="${param.success ne null}">
+        <div th:replace="fragments/mainLayout :: alertSuccess(title=#{register.success.title}, content=#{register.success.message})">
+        </div>
+    </div>
+
     <div class="form-signin">
         <form class="text-center" method="POST" th:action="@{/login}">
             <img class="mb-4"
@@ -14,12 +21,6 @@
             <h1 class="h3 mb-3 fw-normal"
                 th:text="#{login.header}">
             </h1>
-
-<!--            <div th:if="${param.error ne null}"-->
-<!--                 class="alert alert-danger"-->
-<!--                 role="alert"-->
-<!--                 th:text="#{login.error}">-->
-<!--            </div>-->
 
             <div class="form-floating">
                 <input type="text"
@@ -54,6 +55,7 @@
             </button>
         </form>
     </div>
+
 </main>
 
 <footer th:replace="fragments/mainLayout :: footer"></footer>

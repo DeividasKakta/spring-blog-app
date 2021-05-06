@@ -38,7 +38,7 @@ public class UserController {
         User user = userService.convertUserDtoToUser(userDto);
         userService.addUser(user);
 
-        return "redirect:/public/posts";
+        return "redirect:/login?success";
     }
 
 //    @GetMapping("/login")
