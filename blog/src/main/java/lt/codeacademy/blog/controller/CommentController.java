@@ -23,7 +23,6 @@ public class CommentController {
 
     private final CommentService commentService;
     private final PostService postService;
-    private final UserService userService;
 
     @GetMapping("{postId}")
     public String openPostWithComments(@PathVariable UUID postId, Model model) {
@@ -49,9 +48,9 @@ public class CommentController {
     }
 
     @GetMapping("{postId}/comments/update")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("#user.id eq #userId")
     public String openEditComment(@RequestParam UUID id, @PathVariable UUID postId, Model model,
-                                  @AuthenticationPrincipal User user) {
+                                  @RequestParam UUID userId, @AuthenticationPrincipal User user) {
         setPostModel(model, postId);
         model.addAttribute("comment", commentService.getCommentById(id));
 
@@ -59,7 +58,9 @@ public class CommentController {
     }
 
     @PostMapping("{postId}/comments/update")
-    public String editComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult, Model model) {
+    @PreAuthorize("#user.id == #comment.user.id")
+    public String editComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult,
+                              Model model, @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             setPostModel(model, postId);
 
@@ -73,7 +74,9 @@ public class CommentController {
     }
 
     @GetMapping("{postId}/comments/delete")
-    public String deleteComment(@PathVariable UUID postId, @RequestParam UUID id) {
+    @PreAuthorize("hasRole('ADMIN') or #user.id eq #userId")
+    public String deleteComment(@PathVariable UUID postId, @RequestParam UUID id, @RequestParam UUID userId,
+                                @AuthenticationPrincipal User user) {
         commentService.deleteComment(id);
 
         return "redirect:/public/posts/{postId}";

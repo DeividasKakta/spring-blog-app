@@ -43,24 +43,35 @@
         </form>
     </div>
 
-
     <div class="row">
         <ul class="m-2 list-group col-6">
             <li class="list-group-item align-items-start"
-                th:each="comm : ${comments}">
+                th:each="comm : ${comments}"
+                th:with="loginUserId=${#authorization.expression('isAnonymous()')} ? '' : ${#authentication.principal.id},
+                        commentUserId=${comm.user.id}">
 
                     <div class="d-flex justify-content-between">
                         <div class="fw-bold" th:text="${comm.user.username}">Author</div>
-                        <div>
-                            <a class="text-decoration-none text-success fs-5"
-                               th:href="@{/public/posts/{postId}/comments/update(postId=${post.id}, id=${comm.id})}">
-                                <i class="fas fa-edit"></i>
-                            </a>
 
-                            <a class="text-decoration-none text-danger fs-5"
-                               th:href="@{/public/posts/{postId}/comments/delete(postId=${post.id}, id=${comm.id})}">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
+                        <div>
+                            <span th:if="${loginUserId} eq ${commentUserId}">
+                                <a class="text-decoration-none text-success fs-5"
+                                   th:href="@{/public/posts/{postId}/comments/update(
+                                   postId=${post.id}, id=${comm.id}, userId=${commentUserId}
+                                   )}">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </span>
+                            <span th:if="${loginUserId} eq ${commentUserId} or
+                                                    ${#authorization.expression('hasRole(''ADMIN'')')}">
+                                <a class="text-decoration-none text-danger fs-5"
+                                   th:href="@{/public/posts/{postId}/comments/delete(
+                                   postId=${post.id}, id=${comm.id}, userId=${commentUserId}
+                                   )}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </span>
+
                         </div>
                     </div>
 
