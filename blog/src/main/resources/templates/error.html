@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/mainLayout :: head(title=#{page.error.title})"></head>
+<body class="d-flex flex-column min-vh-100">
+
+<header th:replace="fragments/mainLayout :: header"></header>
+
+<main class="flex-grow-1">
+    <img class="mx-auto d-block"
+         th:src="@{/images/error.jpg}"
+         th:alt="#{image.error.alt}"/>
+</main>
+
+<footer th:replace="fragments/mainLayout :: footer"></footer>
+
+</body>
+</html>
