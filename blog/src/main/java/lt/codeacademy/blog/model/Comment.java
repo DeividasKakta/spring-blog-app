@@ -17,7 +17,7 @@ import java.util.Date;
 public class Comment extends BaseEntity {
 
     @NotBlank
-    @Size(max = 255)
+    @Size(max = 255, message = "{validation.size.message}")
     private String message;
 
     private Date date = new Date();
