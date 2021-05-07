@@ -36,10 +36,4 @@ public class UserController {
 
         return "redirect:/login?success";
     }
-
-//    @GetMapping("/login")
-//    public String openLogin() {
-//
-//        return "login";
-//    }
 }

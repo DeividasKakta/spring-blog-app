@@ -20,13 +20,14 @@ public class Comment extends BaseEntity {
     @Size(max = 255)
     private String message;
 
-    private String username = "Test";
-
     private Date date = new Date();
 
-    @JoinColumn
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
+
+    @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
 }

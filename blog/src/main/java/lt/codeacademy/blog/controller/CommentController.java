@@ -2,8 +2,12 @@ package lt.codeacademy.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.model.Comment;
+import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.service.CommentService;
 import lt.codeacademy.blog.service.PostService;
+import lt.codeacademy.blog.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +23,7 @@ public class CommentController {
 
     private final CommentService commentService;
     private final PostService postService;
+    private final UserService userService;
 
     @GetMapping("{postId}")
     public String openPostWithComments(@PathVariable UUID postId, Model model) {
@@ -29,20 +34,24 @@ public class CommentController {
     }
 
     @PostMapping("{postId}")
-    public String createComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult, Model model) {
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public String createComment(@PathVariable UUID postId, @Valid Comment comment, BindingResult bindingResult,
+                                Model model, @AuthenticationPrincipal User user) {
         if (bindingResult.hasErrors()) {
             setPostModel(model, postId);
 
             return "post";
         }
 
-        commentService.addComment(postService.getPostById(postId), comment);
+        commentService.addComment(postService.getPostById(postId), comment, user);
 
         return "redirect:/public/posts/{postId}";
     }
 
     @GetMapping("{postId}/comments/update")
-    public String openEditComment(@RequestParam UUID id, @PathVariable UUID postId, Model model) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public String openEditComment(@RequestParam UUID id, @PathVariable UUID postId, Model model,
+                                  @AuthenticationPrincipal User user) {
         setPostModel(model, postId);
         model.addAttribute("comment", commentService.getCommentById(id));
 

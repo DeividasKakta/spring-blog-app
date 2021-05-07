@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.exception.CommentNotFoundException;
 import lt.codeacademy.blog.model.Post;
 import lt.codeacademy.blog.model.Comment;
+import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.repository.CommentRepository;
 import lt.codeacademy.blog.service.CommentService;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,9 @@ public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
 
     @Override
-    public void addComment(Post post, Comment comment) {
+    public void addComment(Post post, Comment comment, User user) {
         comment.setPost(post);
+        comment.setUser(user);
         commentRepository.save(comment);
     }
 

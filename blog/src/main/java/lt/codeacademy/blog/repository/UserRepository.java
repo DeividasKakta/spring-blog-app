@@ -14,4 +14,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findUserByUsernameWithRoles(@Param("username") String username);
 
     User findUserByUsername(String username);
+
 }

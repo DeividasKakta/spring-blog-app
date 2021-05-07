@@ -50,7 +50,7 @@
                 th:each="comm : ${comments}">
 
                     <div class="d-flex justify-content-between">
-                        <div class="fw-bold" th:text="${comm.username}">Author</div>
+                        <div class="fw-bold" th:text="${comm.user.username}">Author</div>
                         <div>
                             <a class="text-decoration-none text-success fs-5"
                                th:href="@{/public/posts/{postId}/comments/update(postId=${post.id}, id=${comm.id})}">
