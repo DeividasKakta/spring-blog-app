@@ -3,6 +3,7 @@ package lt.codeacademy.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.model.Post;
 import lt.codeacademy.blog.service.PostService;
+import lt.codeacademy.blog.service.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -21,6 +22,7 @@ import java.util.UUID;
 public class PostController {
 
     private final PostService postService;
+    private final UserService userService;
 
     @GetMapping
     public String getPosts(@PageableDefault(size = 5, sort = {"date"}, direction = Sort.Direction.DESC) Pageable pageable,
@@ -41,12 +43,12 @@ public class PostController {
 
     @PostMapping("/create")
     @PreAuthorize("hasRole('ADMIN')")
-    public String createPost(@Valid Post post, BindingResult bindingResult, Model model) {
+    public String createPost(@Valid Post post, BindingResult bindingResult, @RequestParam UUID userId, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("action", "create");
             return "createPost";
         }
-        postService.addPost(post);
+        postService.addPost(post, userService.getUserById(userId));
 
         return "redirect:/public/posts";
     }
@@ -62,12 +64,12 @@ public class PostController {
 
     @PostMapping("/update")
     @PreAuthorize("hasRole('ADMIN')")
-    public String updatePost(@Valid Post post, BindingResult bindingResult, Model model) {
+    public String updatePost(@Valid Post post, BindingResult bindingResult, @RequestParam UUID userId, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("action", "update");
             return "createPost";
         }
-        postService.updatePost(post);
+        postService.updatePost(post, userService.getUserById(userId));
 
         return "redirect:/public/posts";
     }

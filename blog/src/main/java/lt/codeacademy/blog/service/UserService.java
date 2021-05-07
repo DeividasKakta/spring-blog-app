@@ -17,4 +17,5 @@ public interface UserService extends UserDetailsService {
 
     User convertUserDtoToUser(UserDto userDto);
 
+    User getUserById(UUID userId);
 }

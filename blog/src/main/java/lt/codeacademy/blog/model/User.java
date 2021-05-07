@@ -7,7 +7,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -22,9 +21,6 @@ public class User extends BaseEntity implements UserDetails {
 
     @ManyToMany
     private Set<Role> roles;
-
-//    @OneToMany(mappedBy = "user")
-//    private List<Comment> comments;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

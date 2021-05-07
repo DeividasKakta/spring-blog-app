@@ -11,8 +11,10 @@
 
             <form class="row"
                   method="POST"
+                  th:with="userId=${#authentication.principal.id}"
                   th:object="${post}"
-                  th:action="${action} == 'create' ? @{/public/posts/create} : @{/public/posts/update}">
+                  th:action="${action} == 'create' ? @{/public/posts/create(userId=${userId})} :
+                            @{/public/posts/update(userId=${userId})}">
 
                 <input type="hidden" th:field="*{id}" />
 

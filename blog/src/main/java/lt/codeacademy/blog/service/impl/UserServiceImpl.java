@@ -1,5 +1,6 @@
 package lt.codeacademy.blog.service.impl;
 
+import lt.codeacademy.blog.exception.UserNotFoundException;
 import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.model.UserDto;
 import lt.codeacademy.blog.repository.UserRepository;
@@ -48,6 +49,12 @@ public class UserServiceImpl implements UserService {
         user.setRoles(roleService.addUserRoleToSet());
 
         return user;
+    }
+
+    @Override
+    public User getUserById(UUID userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(UserNotFoundException::new);
     }
 
 }

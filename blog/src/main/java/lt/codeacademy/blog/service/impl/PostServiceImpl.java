@@ -3,6 +3,7 @@ package lt.codeacademy.blog.service.impl;
 import lombok.RequiredArgsConstructor;
 import lt.codeacademy.blog.exception.PostNotFoundException;
 import lt.codeacademy.blog.model.Post;
+import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.repository.PostRepository;
 import lt.codeacademy.blog.service.PostService;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void addPost(Post post) {
+    public void addPost(Post post, User user) {
+        post.setUser(user);
         postRepository.save(post);
     }
 
@@ -34,7 +36,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public void updatePost(Post post) {
+    public void updatePost(Post post, User user) {
+        post.setUser(user);
         postRepository.save(post);
     }
 

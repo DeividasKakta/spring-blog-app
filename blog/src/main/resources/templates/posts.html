@@ -33,7 +33,9 @@
                     </div>
                 </div>
 
-                <p class="post-post-meta" th:text="${post.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+                <p class="post-post-meta"
+                   th:text="${post.date} + #{post.author} + ${post.user.username}">
+                </p>
                 <p th:text="${post.content}">Content</p>
                 <hr/>
             </article>

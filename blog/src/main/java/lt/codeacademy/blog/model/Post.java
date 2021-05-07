@@ -3,9 +3,7 @@ package lt.codeacademy.blog.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -24,7 +22,7 @@ public class Post extends BaseEntity {
 
     private Date date = new Date();
 
-//    private String author;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private User user;
 
-//    private UUID userID;
 }
