@@ -1,6 +1,8 @@
 INSERT INTO USERS (id, username, password) VALUES
-('d3cf15bc-61bc-4681-b0d6-4a94bd557448', 'admin', '{bcrypt}$2y$12$Zl06IDjndjLO3O.QWsQ46eyF1SwSxW18rEO6pY8es1AGmRynQY8ES'),
-('d3cf15bc-64bc-4681-b0d6-4a14bd557448', 'user', '{bcrypt}$2y$12$Z5Rz0tZC2YVpustgrWkoxONrqHjBjmEM1VFH8g5MPYMI0oD63Pzka');
+('d3cf15bc-61bc-4681-b0d6-4a94bd557448', 'admin', '{bcrypt}$2y$12$Zl06IDjndjLO3O.QWsQ46eyF1SwSxW18rEO6pY8es1AGmRynQY8ES'),--admin
+('d3cf15bc-64bc-4681-b0d6-4a14bd557448', 'user', '{bcrypt}$2y$12$Z5Rz0tZC2YVpustgrWkoxONrqHjBjmEM1VFH8g5MPYMI0oD63Pzka'),--pass
+('cddd20d5-951e-4a4c-9b49-5944e88d9e14', 'second', '{bcrypt}$2y$12$IwN6891khy7dKHTe0vWsBuUCisDajOdVJYt7Kp5BT1Eu0RnWIBnK6'),--pass
+('9024b2df-39b5-42bc-aa24-373e52a1403f', 'another', '{bcrypt}$2y$12$KcTdBJF44EULiT4N3h7bMOGd0eVt8IPIcmZnJp2FEFASMFJodNm6C');--pass
 
 INSERT INTO POSTS (id, title, content, date, user_id) values
     ('8300bb58-ec03-4323-b5f5-14596b00ad10', 'My first post',
@@ -38,4 +40,20 @@ INSERT INTO ROLES (id, role) VALUES
 INSERT INTO USERS_ROLES (user_id, roles_id) VALUES
     ('d3cf15bc-61bc-4681-b0d6-4a94bd557448', '56ba814c-0b7f-4bc8-8d1d-49cd40f78fd1'),
     ('d3cf15bc-61bc-4681-b0d6-4a94bd557448', '9d438afb-3178-4423-b9e5-b7e84a13451e'),
-    ('d3cf15bc-64bc-4681-b0d6-4a14bd557448', '9d438afb-3178-4423-b9e5-b7e84a13451e');
+    ('d3cf15bc-64bc-4681-b0d6-4a14bd557448', '9d438afb-3178-4423-b9e5-b7e84a13451e'),
+    ('cddd20d5-951e-4a4c-9b49-5944e88d9e14', '9d438afb-3178-4423-b9e5-b7e84a13451e'),
+    ('9024b2df-39b5-42bc-aa24-373e52a1403f', '9d438afb-3178-4423-b9e5-b7e84a13451e');
+
+INSERT INTO COMMENTS (id, date, message, post_id, user_id) VALUES
+    ('164fe137-5676-4ab1-bddf-311ef547e14f', '2021-04-02', 'Sit amet mattis vulputate enim nulla aliquet porttitor.',
+     'f844e470-3a9a-4d46-8af8-45d95d455d16', 'd3cf15bc-64bc-4681-b0d6-4a14bd557448'),
+    ('3c9ca875-6d10-427b-ad5d-a6d2a27bd844', '2021-04-02', 'Eget nulla facilisi etiam dignissim diam quis enim.',
+     'f844e470-3a9a-4d46-8af8-45d95d455d16', 'cddd20d5-951e-4a4c-9b49-5944e88d9e14'),
+    ('cd5da2e3-cbb2-4dc6-8637-dfa0e123b9ea', '2021-04-04', 'Nibh mauris cursus mattis molestie a iaculis at erat pellentesque.',
+     'f844e470-3a9a-4d46-8af8-45d95d455d16', '9024b2df-39b5-42bc-aa24-373e52a1403f'),
+    ('65059fae-1bf5-4ec8-a555-759309de69c8', '2021-04-12', 'Volutpat odio facilisis mauris sit amet massa. Varius duis at consectetur lorem donec massa sapien faucibus et.',
+     'f844e470-3a9a-4d46-8af8-45d95d455d16', '9024b2df-39b5-42bc-aa24-373e52a1403f'),
+    ('98ba0a0c-5cd5-49f1-ad88-f80f2d348ff9', '2021-03-27', 'Varius duis at consectetur lorem donec massa sapien faucibus et.',
+     '9d438afb-3178-4486-b9e5-b7e84a13458e', 'cddd20d5-951e-4a4c-9b49-5944e88d9e14'),
+    ('c7e6a7c5-32b7-429e-8cf8-a73791cdc11f', '2021-03-30', 'Id volutpat lacus laoreet non. Et malesuada fames ac turpis egestas.',
+     '9d438afb-3178-4486-b9e5-b7e84a13458e', 'd3cf15bc-61bc-4681-b0d6-4a94bd557448');
