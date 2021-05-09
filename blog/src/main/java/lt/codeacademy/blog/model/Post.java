@@ -20,6 +20,7 @@ public class Post extends BaseEntity {
     @NotBlank
     private String content;
 
+    @Column(updatable = false)
     private Date date = new Date();
 
     @ManyToOne(cascade = CascadeType.MERGE)

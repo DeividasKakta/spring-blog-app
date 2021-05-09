@@ -1,7 +1,5 @@
 package lt.codeacademy.blog.config;
 
-import lt.codeacademy.blog.service.UserService;
-import lt.codeacademy.blog.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +9,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,11 +18,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String h2ConsolePath;
-    private final UserService userService;
+    private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(@Value("${spring.h2.console.path:}") String h2ConsolePath, UserServiceImpl userService) {
+    public SecurityConfig(@Value("${spring.h2.console.path:}") String h2ConsolePath, UserDetailsService userDetailsService) {
         this.h2ConsolePath = h2ConsolePath;
-        this.userService = userService;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
-                .userDetailsService(userService)
+                .userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
     }
 

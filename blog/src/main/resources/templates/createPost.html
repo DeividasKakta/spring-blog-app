@@ -7,6 +7,10 @@
 
 <main class="container mt-3 flex-grow-1">
     <div class="row">
+        <h3 class="text-center mb-4"
+           th:text="${action} eq 'create' ? #{create.post.createTitle} : #{create.post.editTitle}">
+        </h3>
+
         <div class="col-md-6 offset-md-3 p-3 bg-light border rounded border-secondary">
 
             <form class="row"

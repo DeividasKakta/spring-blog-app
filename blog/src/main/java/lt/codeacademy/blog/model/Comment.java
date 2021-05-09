@@ -20,6 +20,7 @@ public class Comment extends BaseEntity {
     @Size(max = 255, message = "{validation.size.message}")
     private String message;
 
+    @Column(updatable = false)
     private Date date = new Date();
 
     @ManyToOne
