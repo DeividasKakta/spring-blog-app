@@ -1,6 +1,7 @@
 package lt.codeacademy.blog.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.blog.exception.CommentNotFoundException;
 import lt.codeacademy.blog.model.Post;
 import lt.codeacademy.blog.model.Comment;
@@ -14,15 +15,23 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
 
     @Override
     public void addComment(Post post, Comment comment, User user) {
-        comment.setPost(post);
-        comment.setUser(user);
-        commentRepository.save(comment);
+        try {
+            if (comment == null || post == null || user == null) {
+                return;
+            }
+            comment.setPost(post);
+            comment.setUser(user);
+            commentRepository.save(comment);
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+        }
     }
 
     @Override
