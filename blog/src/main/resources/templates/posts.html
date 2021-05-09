@@ -35,8 +35,10 @@
                     </div>
                 </div>
 
-                <p class="post-post-meta"
-                   th:text="${post.date} + #{post.author} + ${post.user.username}">
+                <p class="post-post-meta">
+                    <span class="fs-5" th:with="df='yyyy MMMM d',day=${post.date}"
+                          th:text="${#calendars.format(day,df)}"></span>
+                    <span class="text-muted" th:text="${post.user.username}"></span>
                 </p>
                 <p th:text="${post.content}">Content</p>
                 <hr/>

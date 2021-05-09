@@ -10,7 +10,15 @@
 <main class="container flex-grow-1">
     <article class="post-post">
         <h2 class="post-post-title" th:text="${post.title}">Blog title</h2>
-        <p class="post-post-meta" th:text="${post.date} + ' by Author'">December 23, 2013 by <a href="#">Author</a></p>
+        <p class="post-post-meta">
+            <span class="fs-5"
+                  th:with="df='yyyy MMMM d',day=${post.date}"
+                  th:text="${#calendars.format(day,df)}">
+            </span>
+            <span class="text-muted"
+                  th:text="${post.user.username}">
+            </span>
+        </p>
         <p th:text="${post.content}">Content</p>
     </article>
 
@@ -35,7 +43,7 @@
                      id="messageValidation"
                      th:if="${#fields.hasErrors('message')}"
                      th:errors="*{message}">ERROR</div>
-                <button class="btn btn-outline-secondary my-2"
+                <button class="btn btn-primary my-2"
                         type="submit"
                         th:text="#{create.comment.submit}">
                 </button>
@@ -51,7 +59,14 @@
                         commentUserId=${comm.user.id}">
 
                     <div class="d-flex justify-content-between">
-                        <div class="fw-bold" th:text="${comm.user.username}">Author</div>
+                        <div>
+                            <span class="fw-bold"
+                                  th:text="${comm.user.username}">
+                            </span>
+                            <span class="text-muted" th:with="df='yyyy-MM-dd HH:mm',day=${comm.date}"
+                                  th:text="${#calendars.format(day,df)}">
+                            </span>
+                        </div>
 
                         <div>
                             <span th:if="${loginUserId} eq ${commentUserId}">
