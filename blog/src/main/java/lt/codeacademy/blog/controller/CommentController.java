@@ -5,7 +5,6 @@ import lt.codeacademy.blog.model.Comment;
 import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.service.CommentService;
 import lt.codeacademy.blog.service.PostService;
-import lt.codeacademy.blog.service.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
