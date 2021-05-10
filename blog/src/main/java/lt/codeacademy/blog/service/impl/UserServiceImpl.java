@@ -1,5 +1,6 @@
 package lt.codeacademy.blog.service.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.blog.exception.UserNotFoundException;
 import lt.codeacademy.blog.model.User;
 import lt.codeacademy.blog.model.UserDto;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -37,18 +39,33 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        userRepository.save(user);
+        try {
+            if (user == null) {
+                return;
+            }
+            userRepository.save(user);
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+        }
     }
 
     @Override
     public User convertUserDtoToUser(UserDto userDto) {
-        User user = new User();
+        try {
+            if (userDto == null) {
+                throw new UserNotFoundException();
+            }
+            User user = new User();
 
-        user.setUsername(userDto.getUsername());
-        user.setPassword(encoder.encode(userDto.getPassword()));
-        user.setRoles(roleService.addUserRoleToSet());
+            user.setUsername(userDto.getUsername());
+            user.setPassword(encoder.encode(userDto.getPassword()));
+            user.setRoles(roleService.addUserRoleToSet());
 
-        return user;
+            return user;
+        } catch (Exception e) {
+            log.warn(e.getMessage());
+        }
+        throw new UserNotFoundException();
     }
 
     @Override
