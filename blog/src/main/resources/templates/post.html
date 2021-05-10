@@ -9,7 +9,9 @@
 
 <main class="container flex-grow-1">
     <article class="post-post">
-        <h2 class="post-post-title" th:text="${post.title}">Blog title</h2>
+
+        <h2 class="post-post-title" th:text="${post.title}"></h2>
+
         <p class="post-post-meta">
             <span class="fs-5"
                   th:with="df='yyyy MMMM d',day=${post.date}"
@@ -19,35 +21,58 @@
                   th:text="${post.user.username}">
             </span>
         </p>
-        <p th:text="${post.content}">Content</p>
+
+        <p th:text="${post.content}"></p>
+
         <hr/>
+
     </article>
 
     <div sec:authorize="isAnonymous()">
-        <p class="fw-bold" th:text="#{create.comment.please.login}"></p>
+        <p class="fw-bold"
+           th:text="#{create.comment.please.login}">
+        </p>
     </div>
 
     <div sec:authorize="hasAnyRole('ADMIN', 'USER')">
-        <form class="row" method="POST" th:object="${comment}" th:action="@{/public/posts/{postId}(postId=${post.id})}">
+        <form class="row"
+              method="POST"
+              th:object="${comment}"
+              th:action="@{/public/posts/{postId}(postId=${post.id})}">
+
             <input type="hidden" th:field="*{id}" />
 
-            <p class="fw-bold" th:text="#{create.comment.title}"></p>
+            <p class="fw-bold" th:if="${action ne null}" th:text="#{edit.comment.title}"></p>
+            <p class="fw-bold" th:if="${action eq null}" th:text="#{create.comment.title}"></p>
+
             <div class="col-4">
+
                 <textarea class="form-control"
                           rows="3"
                           th:placeholder="#{create.comment.placeholder}"
                           th:field="*{message}"
-                          th:classappend=" ${#fields.hasErrors('message') ? 'is-invalid' : ''}"
+                          th:classappend="|${#fields.hasErrors('message') ? 'is-invalid' : ''}
+                                          ${action ne null ? 'border-primary bg-light' : ''}|"
                           aria-describedby="messageValidation">
                 </textarea>
+
                 <div class="invalid-feedback"
                      id="messageValidation"
                      th:if="${#fields.hasErrors('message')}"
-                     th:errors="*{message}">ERROR</div>
+                     th:errors="*{message}">
+                </div>
+
                 <button class="btn btn-primary my-2"
                         type="submit"
+                        th:if="${action eq null}"
                         th:text="#{create.comment.submit}">
                 </button>
+                <button class="btn btn-primary my-2"
+                        type="submit"
+                        th:if="${action ne null}"
+                        th:text="#{edit.comment.submit}">
+                </button>
+
             </div>
         </form>
     </div>
@@ -64,12 +89,14 @@
                             <span class="fw-bold"
                                   th:text="${comm.user.username}">
                             </span>
-                            <span class="text-muted" th:with="df='yyyy-MM-dd HH:mm',day=${comm.date}"
+                            <span class="text-muted"
+                                  th:with="df='yyyy-MM-dd HH:mm',day=${comm.date}"
                                   th:text="${#calendars.format(day,df)}">
                             </span>
                         </div>
 
                         <div>
+
                             <span th:if="${loginUserId} eq ${commentUserId}">
                                 <a class="text-decoration-none text-success fs-5"
                                    th:href="@{/public/posts/{postId}/comments/update(
@@ -78,6 +105,7 @@
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </span>
+
                             <span th:if="${loginUserId} eq ${commentUserId} or
                                                     ${#authorization.expression('hasRole(''ADMIN'')')}">
                                 <a class="text-decoration-none text-danger fs-5"
@@ -91,7 +119,9 @@
                         </div>
                     </div>
 
-                    <p class="text-break" th:text="${comm.message}">Comment text</p>
+                    <p class="text-break"
+                       th:text="${comm.message}">
+                    </p>
 
             </li>
         </ul>

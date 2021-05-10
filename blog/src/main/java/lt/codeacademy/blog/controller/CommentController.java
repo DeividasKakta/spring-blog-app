@@ -52,6 +52,7 @@ public class CommentController {
                                   @RequestParam UUID userId, @AuthenticationPrincipal User user) {
         setPostModel(model, postId);
         model.addAttribute("comment", commentService.getCommentById(id));
+        model.addAttribute("action", "update");
 
         return "post";
     }
